@@ -1,4 +1,6 @@
+--Add leaderstats/Stage to Player upon connect
 game.Players.PlayerAdded:Connect(function(Player)
+  
   -- leaderstats Folder
   local leaderstats = Instance.new("Folder")
   leaderstats.Name = "leaderstats"
@@ -9,8 +11,9 @@ game.Players.PlayerAdded:Connect(function(Player)
   stage.Name = "Stage"
   stage.Value = 1
   
-  
+  -- Teleport to Stage's spawn point
   Player.CharacterAdded:Connect(function(Character
+
     -- wait for Char to load
     repeat wait() until Player.Character ~= nil
     
