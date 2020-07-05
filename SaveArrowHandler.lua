@@ -1,25 +1,14 @@
-local Stages = workspace:WaitForChild("Stages")  -- contains spawn locations
-local ReplicatedStorage = game:GetService("ReplicatedStorage") -- contains downarrow
-
-for i,Stage in pairs(Stages:GetChildren()) do
-      
-  Stage.Touched:Connect(function(touch)
-    
-    -- verify touch
-    local humanoid       
-    if touch.Parent:FindFirstChild("Humanoid") then           
-        humanoid = touch.Parent.Humanoid
-    end
-       
-    if touch.Parent and touch.Parent.Parent:FindFirstChild("Humanoid") then           
-        humanoid = touch.Parent.Parent.Humanoid
-    end
-    
-    if humanoid then
-      RemoveArrow()
-      PlaceNextArrow(tonumber(Stage.Name) + 1)			  
-    end
-  end)
+local Stages = workspace:WaitForChild("Stages") -- Spawn Locations
+local ReplicatedStorage = game:GetService("ReplicatedStorage") -- Contains DownArrow part
+local Module = require(game.ServerScriptService.ModuleScript) -- Contains isHuman logic
+ 
+for i,stage in pairs(Stages:GetChildren()) do       
+    stage.Touched:Connect(function(otherPart)        
+        if Module.IsHuman(otherPart) then
+			RemoveArrow()
+			PlaceNextArrow(tonumber(stage.Name) + 1)
+        end
+    end)
 end
 
 function RemoveArrow()
@@ -29,7 +18,7 @@ function RemoveArrow()
   end
 end
 
-function PlaceNextArrow(stageName)  
+function PlaceNextArrow(nextStageName)  
   local nextStage = Stages:FindFirstChild(nextStageName)  
   if (nextStage) then
     local nextArrow = ReplicatedStorage.DownArrow:Clone()
