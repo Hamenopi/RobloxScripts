@@ -1,0 +1,42 @@
+local Stages = workspace:WaitForChild("Stages")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+ 
+for i,Stage in pairs(Stages:GetChildren()) do
+      
+  Stage.Touched:Connect(function(touch)
+    
+    -- verify touch
+    local humanoid       
+    if touch.Parent:FindFirstChild("Humanoid") then           
+        humanoid = touch.Parent.Humanoid
+    end
+       
+    if touch.Parent and touch.Parent.Parent:FindFirstChild("Humanoid") then           
+        humanoid = touch.Parent.Parent.Humanoid
+    end
+    
+    if humanoid then
+      RemoveCurrectArrow(Stage)
+      PlaceNextArrow(Stage)			  
+    end
+  end)
+end
+
+function RemoveCurrectArrow(Stage)
+  -- If stage has an arrow
+  local arrow = Stage.Parent:FindFirstChild("DownArrow")
+  -- Destroy it
+  if (arrow) then
+    arrow:Destroy()
+  end
+end
+
+function PlaceNextArrow(Stage)
+  local nextStageName = Stage.Name + 1
+	local nextStage = Stage.Parent:FindFirstChild(nextLocationName)
+	if (nextStage) then
+    local nextArrow = ReplicatedStorage.DownArrow:Clone()
+    nextArrow.Position = nextStage.Position + Vector3.new(0,5,0)
+    nextArrow.Parent = Stage.Parent
+  end
+end
