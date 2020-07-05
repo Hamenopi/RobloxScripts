@@ -17,7 +17,8 @@ local function SavePlayerData(player)
         return errormsg
     end        
 end
-  
+
+-- When player logs in
 Players.PlayerAdded:Connect(function(player)
        
     -- Gets SavaData from DataStore
@@ -30,15 +31,15 @@ Players.PlayerAdded:Connect(function(player)
 
     local stage = Instance.new("IntValue")
     stage.Name = "Stage"
-    stage.Parent = stats
+    stage.Parent = leaderstats
     stage.Value = 1
   
     -- Load SaveData
     if data then           
       print(player.Name .. " is on stage " .. data.Stage)       
       -- future proofing
-      for i, stats in pairs(Stats:GetChildren()) do           
-            stats.Value = Data[stats.Name]     
+      for i, stats in pairs(leaderstats:GetChildren()) do           
+            stats.Value = data[stats.Name]     
       end        
         
     else        
