@@ -3,7 +3,7 @@ Increments Step Count when player is moving
 --]] 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Common = ReplicatedStorage.Common
+local Common = require(ReplicatedStorage.Common)
 
 -- Faster characters need more steps
 local function GetSpeedModifier(speed)

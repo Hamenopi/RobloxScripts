@@ -2,9 +2,9 @@
 Handles when SetSpeed in invoked
 ]]
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Constants = ReplicatedStorage.Constants
-local Common = ReplicatedStorage.Common
-local Players = game:GetService("Players") 
+local Constants = require(ReplicatedStorage.Constants)
+local Common = require(ReplicatedStorage.Common)
+local Players = game:GetService("Players")
 
 Players.PlayerAdded:Connect(function(player)
 

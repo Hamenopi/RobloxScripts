@@ -2,8 +2,8 @@ local Players = game:GetService("Players")
 local DataStoreService = game:GetService("DataStoreService")
 local SaveDataStore = DataStoreService:GetDataStore("SaveData")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Common = ReplicatedStorage.Common
-local Constants = ReplicatedStorage.Constants
+local Common = require(ReplicatedStorage.Common)
+local Constants = require(ReplicatedStorage.Constants)
 
 local function SavePlayerData(player)
 
