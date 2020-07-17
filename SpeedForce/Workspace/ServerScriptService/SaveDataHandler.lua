@@ -2,9 +2,9 @@ local Players = game:GetService("Players")
 local DataStoreService = game:GetService("DataStoreService")
 local SaveDataStore = DataStoreService:GetDataStore("SaveData")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Module = ReplicatedStorage.ModuleScript
+local Common = ReplicatedStorage.Common
+local Constants = ReplicatedStorage.Constants
 
--- uses SaveDataStore
 local function SavePlayerData(player)
 
 	local success,errormsg = pcall(function()
@@ -47,7 +47,7 @@ Players.PlayerAdded:Connect(function(player)
 	local steps = Instance.new("IntValue")
 	steps.Name = "Steps"
 	steps.Parent = leaderstats
-	steps.Value = Module.MinSteps
+	steps.Value = Constants.MinSteps
 	
 	-- Logic
 	steps.Changed:Connect(function(newStepCount)
@@ -55,8 +55,8 @@ Players.PlayerAdded:Connect(function(player)
 		-- Give player boost each 1000 steps
 		if steps.Value % 1000 == 0 then
 			local humanoid = character:WaitForChild("Humanoid")
-			Module.SetSpeed(humanoid.WalkSpeed +1)
-			Module.SetJump(humanoid.WalkSpeed +1)
+			Common.SetSpeed(humanoid.WalkSpeed +1)
+			Common.SetJump(humanoid.WalkSpeed +1)
 		end -- if steps.Value
 	end) -- steps.Changed
 
@@ -68,7 +68,7 @@ Players.PlayerAdded:Connect(function(player)
 	local speed = Instance.new("IntValue")
 	speed.Name = "Speed"
 	speed.Parent = hiddenstats
-	speed.Value = Module.MinSpeed
+	speed.Value = Constants.MinSpeed
 	
 	-- Logic
 	speed.Changed:Connect(function(newSpeed)
@@ -81,7 +81,7 @@ Players.PlayerAdded:Connect(function(player)
 	local jump = Instance.new("IntValue")
 	jump.Name = "Jump"
 	jump.Parent = hiddenstats
-	jump.Value = Module.MinJump
+	jump.Value = Constants.MinJump
 	
 	-- Logic
 	jump.Changed:Connect(function(newJump)
